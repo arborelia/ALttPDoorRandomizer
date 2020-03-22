@@ -100,7 +100,16 @@ def main():
     loglevel = {'error': logging.ERROR, 'info': logging.INFO, 'warning': logging.WARNING, 'debug': logging.DEBUG}[erargs.loglevel]
     logging.basicConfig(format='%(message)s', level=loglevel)
 
-    DRMain(erargs, seed)
+    for i in range(20):
+        try:
+            print(f"Attempt #{i + 1}")
+            DRMain(erargs, seed + i)
+            return
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            print()
+            pass
 
 def get_weights(path):
     try:
